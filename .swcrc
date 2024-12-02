@@ -1,0 +1,32 @@
+{
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+      "tsx": false,
+      "decorators": true,
+      "dynamicImport": true
+    },
+    "transform": {
+      "legacyDecorator": true,
+      "decoratorMetadata": true
+    },
+    "target": "es2022",
+    "externalHelpers": true,
+    "keepClassNames": true,
+    "loose": true,
+    "baseUrl": "src",
+    "paths": {
+      "~src/*": ["*"]
+    }
+  },
+  "module": {
+    "type": "commonjs",
+    "strict": false,
+    "strictMode": false,
+    "lazy": false,
+    "noInterop": false
+  },
+  "sourceMaps": true,
+  "minify": true,
+  "isModule": true
+}
