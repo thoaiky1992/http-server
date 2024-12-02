@@ -13,5 +13,5 @@ function ErrorMiddleware(error: HttpException, request: Request, res: Response, 
   const message = error?.message || getReasonPhrase(statusCode);
   res.status(statusCode).json({ statusCode, message });
 }
-
+export type TErrorMiddleware = ReturnType<typeof ErrorMiddleware>;
 export default ErrorMiddleware;

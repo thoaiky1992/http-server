@@ -1,1 +1,1 @@
-export * from './decorator';
+export { TErrorMiddleware } from './error.middleware';

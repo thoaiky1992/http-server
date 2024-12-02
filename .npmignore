@@ -4,3 +4,5 @@ node_modules/
 .eslintrc
 .prettierrc
 .swcrc
+package-lock.json
+tsconfig.json
