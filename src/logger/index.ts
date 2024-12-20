@@ -1,8 +1,7 @@
-import moment from 'moment';
-import * as winston from 'winston';
 import chalk from 'chalk';
 import { StatusCodes, getReasonPhrase } from 'http-status-codes';
-import { IHttpServer } from '~src/http-server';
+import moment from 'moment';
+import * as winston from 'winston';
 
 const FORMAT_DATETIME = 'DD-MM-YYYY HH:mm:ss';
 
@@ -80,7 +79,7 @@ export class Logger {
   protected static __instance: Logger;
   protected __wintonLogger!: winston.Logger;
 
-  constructor(transports: winston.transport[] = [], dir?: string) {
+  constructor(options?: winston.LoggerOptions) {
     this.__wintonLogger = winston.createLogger({
       format: winston.format.combine(
         winston.format.timestamp(),
@@ -90,7 +89,8 @@ export class Logger {
           consoleFormat
         )
       ),
-      transports: [new winston.transports.Console(), ...transports]
+      transports: [new winston.transports.Console()],
+      ...options
     });
   }
 
@@ -101,8 +101,8 @@ export class Logger {
     return this.__instance;
   }
 
-  public static setInstance(transports: winston.transport[] = [], dir?: string) {
-    this.__instance = new Logger(transports, dir);
+  public static setInstance(options: winston.LoggerOptions) {
+    this.__instance = new Logger(options);
   }
 
   public error(title = '', message: any, params: any = {}) {
@@ -137,25 +137,5 @@ export function LoggerProperty(): PropertyDecorator {
       get: () => Logger.instance,
       configurable: true
     });
-  };
-}
-
-/**
- * Logger Decorator
- *
- * @returns
- */
-export function OverrideLogger(transports: winston.transport[] = [], dir?: string) {
-  return function <T extends new (...args: any[]) => IHttpServer>(target: T) {
-    return class extends target {
-      constructor(...args: any[]) {
-        super(...args);
-      }
-
-      async start(): Promise<void> {
-        Logger.setInstance(transports, dir);
-        await super.start();
-      }
-    };
   };
 }

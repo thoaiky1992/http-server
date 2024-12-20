@@ -174,6 +174,7 @@ export async function initializeMiddlewareAndRoute(app: Express, prefixApi: stri
   }
 
   controllerPaths.forEach((controllerPath: any) => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const controller = require(path.join(controllerPath)).default;
     const resolveController = AppContainer.resolve(controller);
     const prefix = Reflect.getMetadata(MetaDataKey.prefix, controller);

@@ -1,6 +1,6 @@
 {
   "name": "@thoaiky1992/http-server",
-  "version": "1.1.30",
+  "version": "2.0.3",
   "main": "dist/index",
   "types": "dist/index",
   "author": "Thoại Kỳ",
@@ -11,8 +11,7 @@
     "url": "git+https://github.com/thoaiky1992/http-server.git"
   },
   "scripts": {
-    "copy-files": "copyfiles --all --up 1 --exclude \"./**/*.{ts,tsx,js}\" \"./src/**/*\" ./dist",
-    "build": "rimraf dist && tsc && tsc-alias && npm run copy-files",
+    "build": "rimraf ./dist && tsc && tsc-alias",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "prettier": "prettier --check src",
@@ -35,30 +34,28 @@
   "keywords": [
     "http-server",
     "thoaiky1992",
+    "thoaiky",
     "http",
     "server",
-    "thoaiky",
-    "decorator",
-    "typescript"
+    "the express server with typescript"
   ],
   "devDependencies": {
+    "@eslint/js": "^9.18.0",
     "@types/express": "^4.17.21",
     "@types/multer": "^1.4.12",
-    "@types/node": "^20.14.15",
-    "@typescript-eslint/eslint-plugin": "^7.16.1",
-    "@typescript-eslint/parser": "^7.16.1",
-    "copyfiles": "^2.4.1",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
+    "@types/node": "^22.10.7",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.2",
+    "globals": "^15.14.0",
     "husky": "^4.3.8",
     "lint-staged": "^12.3.3",
-    "prettier": "^3.3.3",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
-    "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.10",
-    "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.5.4"
+    "tsx": "^4.19.2",
+    "typescript-eslint": "^8.20.0"
   },
   "dependencies": {
     "class-transformer": "^0.5.1",

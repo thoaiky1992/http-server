@@ -14,7 +14,6 @@ declare global {
       KAFKA_BROKERS: string;
       KAFKA_COMSUMER_GROUP_ID: string;
     }
-    ƒ;
   }
 }
 
