@@ -4,3 +4,8 @@ export * from './types';
 export * from './http-exception';
 export * from './handler';
 export * from './crud';
+export * from 'http-status-codes';
+export * from 'class-validator';
+export * from 'class-transformer';
+import * as winstonIntance from 'winston';
+export const winston = winstonIntance;

@@ -69,7 +69,7 @@ const combinedFormat = winston.format.combine(
   logFileFormat
 );
 
-const TransportFile = (dir: string) =>
+const TransportFile = (dir: string = `${process.cwd()}/logs`) =>
   new winston.transports.File({
     filename: dir + `/${moment().format('DD-MM-YYYY')}.error.log`,
     level: 'error',
@@ -77,12 +77,10 @@ const TransportFile = (dir: string) =>
   });
 
 export class Logger {
-  dir: string;
   protected static __instance: Logger;
   protected __wintonLogger!: winston.Logger;
 
   constructor(transports: winston.transport[] = [], dir?: string) {
-    this.dir = dir || `${process.cwd()}/logs`;
     this.__wintonLogger = winston.createLogger({
       format: winston.format.combine(
         winston.format.timestamp(),
