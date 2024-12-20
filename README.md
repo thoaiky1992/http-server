@@ -305,9 +305,9 @@ export default class TestController {
 
 _Example:_
 
-![image](https://res.cloudinary.com/dhgwmvu7l/image/upload/v1733192309/http-server/gq4clijnvyveiyw7go8v.png)
 
 ![image](https://res.cloudinary.com/dhgwmvu7l/image/upload/v1733192309/http-server/x8obiselayvu6erewmgb.png)
+![image](https://res.cloudinary.com/dhgwmvu7l/image/upload/v1733200629/http-server/mxgcs57q2gnlnkgtjdcy.png)
 
 ## Authorization and Validate Request Body:
 
