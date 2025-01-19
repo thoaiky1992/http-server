@@ -2,7 +2,6 @@
 
 The package simplifies creating `RESTful API` in `TypeScript` with `Decorators`, enabling automatic handling of routes, request parameters, and validations. It is built on top of `Express.js`, leveraging its capabilities while adding higher-level abstractions for easier API development.
 
-
 # Table of Contents
 
 - [Installation](#installation)
@@ -16,6 +15,7 @@ The package simplifies creating `RESTful API` in `TypeScript` with `Decorators`,
 - [Custom decorator](#custom-decorator)
 
 ## Installation
+
 > ### Package requires Node.js verion >= 20.11.1
 
 #### 1. Install module:
@@ -54,6 +54,7 @@ npm install -D @types/express @types/multer
 ```
 
 ## Example of usage
+
 The package is designed to **automatically scan** for a folder named `controllers` and filter and process files with the `.controller.ts` extension.
 
 When running in a `production environment`, the application will process the compiled `.controller.js` files (instead of `.ts` files) to ensure optimal performance.
@@ -63,12 +64,12 @@ To enable production mode, you need to set the `NODE_ENV` environment variable t
 #### How It Works:
 
 1. During **development**:
-    - The package scans the `src/controllers` folder for `.controller.ts` files.
-    - These files are used directly for development purposes.
+   - The package scans the `src/controllers` folder for `.controller.ts` files.
+   - These files are used directly for development purposes.
 2. During **production**:
-    - The `NODE_ENV=production` flag instructs the package to scan the `dist/controllers` folder for `.controller.js` files.
-    - This ensures that only precompiled and optimized files are executed, improving performance.
-    - Ex: `NODE_ENV=production node dist/index.js`
+   - The `NODE_ENV=production` flag instructs the package to scan the `dist/controllers` folder for `.controller.js` files.
+   - This ensures that only precompiled and optimized files are executed, improving performance.
+   - Ex: `NODE_ENV=production node dist/index.js`
 
 #### 1. The project folder structure:
 
@@ -93,21 +94,23 @@ To enable production mode, you need to set the `NODE_ENV` environment variable t
 #### 2. Create a file `src/index.ts`
 
 ```typescript
-import 'reflect-metadata'
-import 'dotenv/config'
-import path from 'path'
-import { EnableServer, HttpServer } from '@thoaiky1992/http-server'
+import 'reflect-metadata';
+import 'dotenv/config';
+import path from 'path';
+import { EnableServer, HttpServer } from '@thoaiky1992/http-server';
+import bodyParser from 'body-parser';
 
 @EnableServer()
 class App extends HttpServer {
   constructor(port: number) {
-    super(port)
+    super(port);
   }
 }
-const PORT = Number(process.env.PORT || 3000)
-const app = new App(PORT)
+const PORT = Number(process.env.PORT || 3000);
+const app = new App(PORT);
 // app.setPrefixApi('/api/v1') // If not set, the default will be '/api'
-app.start()
+app.applyMiddlewares([bodyParser.json({ limit: '20mb' })]);
+app.start();
 ```
 
 #### 3. Create a file `src/controllers/test.controller.ts`
@@ -138,25 +141,26 @@ This method is used to apply an array of middleware functions to your Express ap
 import 'reflect-metadata';
 import path from 'path';
 import { EnableServer, HttpServer } from '@thoaiky1992/http-server';
-import compression from 'compression';
 import { NextFunction, Request, Response } from 'express';
+import compression from 'compression';
 import helmet from 'helmet';
+import bodyParser from 'body-parser';
 
 @EnableServer()
 class App extends HttpServer {
-  constructor(port: number, controlerDir: string) {
-    super(port, controlerDir);
+  constructor(port: number) {
+    super(port);
   }
 }
-const controlerDir = path.join(process.cwd(), 'src', 'controllers');
-const app = new App(3000, controlerDir);
+const PORT = Number(process.env.PORT || 3000);
+const app = new App(PORT);
 
 function handleAuthMiddleware(req: Request, _: Response, next: NextFunction) {
   req.user = { id: 1, email: 'thoaiky1992@gmail.com', name: 'Thoaiky' };
   next();
 }
 
-const middlewares = [compression(), helmet(), handleAuthMiddleware];
+const middlewares = [bodyParser.json({ limit: '20mb' }), compression(), helmet(), handleAuthMiddleware];
 app.applyMiddlewares(middlewares);
 app.start();
 ```
@@ -175,12 +179,12 @@ import { getReasonPhrase, StatusCodes } from 'http-status-codes';
 
 @EnableServer()
 class App extends HttpServer {
-  constructor(port: number, controlerDir: string) {
-    super(port, controlerDir);
+  constructor(port: number) {
+    super(port);
   }
 }
-const controlerDir = path.join(process.cwd(), 'src', 'controllers');
-const app = new App(3000, controlerDir);
+const PORT = Number(process.env.PORT || 3000);
+const app = new App(PORT);
 
 function errorMiddleware(error: HttpException, _: Request, res: Response, __: NextFunction) {
   // write log , ....
@@ -304,7 +308,6 @@ export default class TestController {
 ```
 
 _Example:_
-
 
 ![image](https://res.cloudinary.com/dhgwmvu7l/image/upload/v1733192309/http-server/x8obiselayvu6erewmgb.png)
 ![image](https://res.cloudinary.com/dhgwmvu7l/image/upload/v1733200629/http-server/mxgcs57q2gnlnkgtjdcy.png)
@@ -577,13 +580,12 @@ import { EnableServer, HttpServer } from '@thoaiky1992/http-server';
 @EnableServer()
 @EnableMongoDB() // connect to mongoDB ....
 class App extends HttpServer {
-  constructor(port: number, controlerDir: string) {
-    super(port, controlerDir);
+  constructor(port: number) {
+    super(port);
   }
 }
-const controlerDir = path.join(process.cwd(), 'src', 'controllers');
-const app = new App(3000, controlerDir);
-
+const PORT = Number(process.env.PORT || 3000);
+const app = new App(PORT);
 app.start();
 ```
 

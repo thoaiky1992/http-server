@@ -22,7 +22,7 @@ export class HttpServer extends IHttpServer {
   }
 
   public async start(): Promise<void> {
-    this._app.use(express.json());
+    // this._app.use(express.json());
     this._app.use(express.static('public'));
 
     this._middlewares.forEach((_middleware) => this._app.use(_middleware));

@@ -119,7 +119,7 @@ export async function responseInterceptor(
     if (result instanceof Promise) {
       result = await result;
     }
-    if (!(result instanceof ServerResponse)) {
+    if (!res.headersSent && !(result instanceof ServerResponse)) {
       const httpCode = Reflect.getMetadata(MetaDataKey.httpCode, target, propertyKey);
       const statusCode = httpCode ?? 200;
       res.status(statusCode).json({ data: result ?? null, statusCode });
