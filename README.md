@@ -144,12 +144,12 @@ import helmet from 'helmet';
 
 @EnableServer()
 class App extends HttpServer {
-  constructor(port: number, controlerDir: string) {
-    super(port, controlerDir);
+  constructor(port: number) {
+    super(port)
   }
 }
-const controlerDir = path.join(process.cwd(), 'src', 'controllers');
-const app = new App(3000, controlerDir);
+const PORT = Number(process.env.PORT || 3000)
+const app = new App(PORT)
 
 function handleAuthMiddleware(req: Request, _: Response, next: NextFunction) {
   req.user = { id: 1, email: 'thoaiky1992@gmail.com', name: 'Thoaiky' };
@@ -175,12 +175,12 @@ import { getReasonPhrase, StatusCodes } from 'http-status-codes';
 
 @EnableServer()
 class App extends HttpServer {
-  constructor(port: number, controlerDir: string) {
-    super(port, controlerDir);
+  constructor(port: number) {
+    super(port)
   }
 }
-const controlerDir = path.join(process.cwd(), 'src', 'controllers');
-const app = new App(3000, controlerDir);
+const PORT = Number(process.env.PORT || 3000)
+const app = new App(PORT)
 
 function errorMiddleware(error: HttpException, _: Request, res: Response, __: NextFunction) {
   // write log , ....
@@ -577,13 +577,12 @@ import { EnableServer, HttpServer } from '@thoaiky1992/http-server';
 @EnableServer()
 @EnableMongoDB() // connect to mongoDB ....
 class App extends HttpServer {
-  constructor(port: number, controlerDir: string) {
-    super(port, controlerDir);
+  constructor(port: number) {
+    super(port)
   }
 }
-const controlerDir = path.join(process.cwd(), 'src', 'controllers');
-const app = new App(3000, controlerDir);
-
+const PORT = Number(process.env.PORT || 3000)
+const app = new App(PORT)
 app.start();
 ```
 
