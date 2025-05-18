@@ -9,4 +9,5 @@ export * from 'class-transformer';
 export * from 'http-status-codes';
 import * as winstonIntance from 'winston';
 
+export type { Request, Response, NextFunction, RequestHandler, Application } from 'express';
 export const winston = winstonIntance;
