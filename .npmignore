@@ -1,0 +1,8 @@
+src/
+node_modules/
+.git/
+.eslintrc
+.prettierrc
+.swcrc
+package-lock.json
+tsconfig.json

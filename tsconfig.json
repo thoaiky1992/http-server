@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS", // Quy định output module được sử dụng
+    "lib": ["ESNext"],
+    "target": "ES2022", // Target output cho code
+    "outDir": "dist", // Đường dẫn output cho thư mục build
+    "resolveJsonModule": true,
+    "moduleResolution": "Node",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "removeComments": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
+    "useDefineForClassFields": false,
+    "declaration": true,
+    "types": ["node"],
+    "strict": true /* Enable all strict type-checking options. */,
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "baseUrl": ".", // Đường dẫn base cho các import
+    "paths": {
+      "~src/*": ["src/*"]
+    }
+  },
+  "files": ["./src/types/index.d.ts"], // Các file dùng để defined global type cho dự án
+  "include": ["src/**/*"], // Đường dẫn include cho các file cần build
+  "exclude": ["node_modules/**/*", "dist"]
+}
